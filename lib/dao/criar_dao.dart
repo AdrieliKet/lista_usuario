@@ -13,13 +13,9 @@ class CriarDAO extends StatelessWidget {
     Database database = await openDatabase(path, version: 1);
     String sql;
     Future<int> linhasAfetadas;
-    if (id == null &&
-        RegExp(validarEmail).hasMatch(email!) &&
-        RegExp(validarTelefone).hasMatch(telefone!)) {
-      sql =
-          'INSERT INTO usuario (nome, email, senha, telefone) VALUES (?,?,?,?,?)';
-      linhasAfetadas = database.rawInsert(
-          sql, [nome, email, senha, telefone]);
+    if (id == null) {
+      sql = 'INSERT INTO usuario (nome, email, senha, telefone) VALUES (?,?,?,?)';
+      linhasAfetadas = database.rawInsert(sql, [nome, email, senha, telefone]);
     } else {
       sql =
           'UPDATE usuario SET nome = ?, email=?, senha=?, telefone=?, WHERE id = ?';

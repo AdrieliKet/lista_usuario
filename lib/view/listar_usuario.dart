@@ -24,7 +24,7 @@ class _ListausuarioState extends State<ListaUsuario> {
             IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () =>
-                    Navigator.pushNamed(context, '/addUsuarios'))
+                    Navigator.pushNamed(context, '/addUsuario'))
           ],
         ),
         body: FutureBuilder(

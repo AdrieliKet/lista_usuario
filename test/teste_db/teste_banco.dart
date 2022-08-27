@@ -1,45 +1,28 @@
+import 'package:lista_usuario/bd/conection.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
-  Database? _database;
-  String criarUsuario = '''
-    CREATE TABLE usuario (
-    id INTEGER PRIMARY KEY,
-    nome TEXT NOT NULL, 
-    email TEXT NOT NULL,
-    senha TEXT NOT NULL,
-    telefone TEXT NOT NULL,
-    )''';
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
+  late Database db;
 
-  Future<Database> getDatabase() async {
-    if (_database == null) {
-      var path = join(await getDatabasesPath(), 'banco.db');
-      _database = await openDatabase(
-        path,
-        version: 1,
-        onCreate: (db, version) {
-          db.execute(criarUsuario);
-        },
-      );
-    }
-    return _database!;
-  }
-
-  tearDown(() {
-    //executa o que foi definido após cada teste
+  setUp(() async {
+    String path = join(await getDatabasesPath(), 'banco.db');
+    db = (await Conexao.abrirConexao()) as Database;
   });
+
+  tearDown(() {});
 
   tearDownAll(() {
-    //executa o que foi definido após todos os testes
-    _database?.close();
+    db.close();
   });
 
-  group('teste conexao', () {
-    // definindo um grupo de testes
-    test('conexão nula', () async {
-      expect(_database?.isOpen, null);
+  group("Teste de Conexão", () {
+    test("Teste de conexão aberta", () {
+      expect(db.isOpen, true);
     });
   });
 }
