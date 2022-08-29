@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../dao/listar_dao.dart';
+import 'package:lista_usuario/dao/usuario_dao.dart';
+import 'package:lista_usuario/entity/Usuario.dart';
 import '../view/adicionar_usuario.dart';
 
 import '../main.dart';
@@ -13,7 +14,7 @@ class ListaUsuario extends StatefulWidget {
 }
 
 class _ListausuarioState extends State<ListaUsuario> {
-  ListarDao listarDao = ListarDao();
+  UsuarioDao usuarioDao = new UsuarioDao();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,7 @@ class _ListausuarioState extends State<ListaUsuario> {
                                               onPressed: () {
                                                 AdicionarUsuario form =
                                                     new AdicionarUsuario();
-                                                excluir(int.parse(
+                                                usuarioDao.excluir(int.parse(
                                                     usuario['id']
                                                         .toString()));
                                                 Navigator.push(

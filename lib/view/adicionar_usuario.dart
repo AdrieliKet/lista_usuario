@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../dao/criar_dao.dart';
+import 'package:lista_usuario/dao/usuario_dao.dart';
+import 'package:lista_usuario/entity/Usuario.dart';
 
 import '../main.dart';
 
@@ -13,11 +13,13 @@ class AdicionarUsuario extends StatefulWidget {
 
 class _AdicionarUsuarioState extends State<AdicionarUsuario> {
   dynamic id;
-  CriarDAO criarDAO = new CriarDAO();
+  UsuarioDao usuarioDao = new UsuarioDao();
   String? nome;
   String? email;
   String? senha;
   String? telefone;
+  late Usuario usuario;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
           IconButton(
               icon: const Icon(Icons.check_box_outlined),
               onPressed: () {
-                criarDAO.salvar(context, id, nome, email, senha, telefone);
+                usuarioDao.salvar(usuario);
                 setState(() {});
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) => MyApp()));
@@ -50,13 +52,13 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
           margin: EdgeInsets.all(15.0),
           child: Form(
             child: Column(children: [
-              criarDAO.criarCampo('Nome:', 'Digite seu nome',
+              usuarioDao.criarCampo('Nome:', 'Digite seu nome',
                   (valorDigitado) => nome = valorDigitado, nome),
-              criarDAO.criarCampo('Telefone:', 'Apenas números e sem dígito',
+              usuarioDao.criarCampo('Telefone:', 'Apenas números e sem dígito',
                   (valorDigitado) => telefone = valorDigitado, telefone),
-              criarDAO.criarCampo('Senha:', 'Letras e números',
+              usuarioDao.criarCampo('Senha:', 'Letras e números',
                   (valorDigitado) => senha = valorDigitado, senha),
-              criarDAO.criarCampo('E-mail:', 'Digite seu e-mail',
+              usuarioDao.criarCampo('E-mail:', 'Digite seu e-mail',
                   (valorDigitado) => email = valorDigitado, email),
             ]),
           ),

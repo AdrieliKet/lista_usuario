@@ -10,7 +10,7 @@ void main() {
   late Database db;
 
   setUp(() async {
-    String path = join(await getDatabasesPath(), 'banco.db');
+    String path = join(await getDatabasesPath(), 'banco1.db');
     db = (await Conexao.abrirConexao()) as Database;
   });
 
