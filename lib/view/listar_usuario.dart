@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lista_usuario/dao/usuario_dao.dart';
-import 'package:lista_usuario/entity/Usuario.dart';
+import 'package:lista_usuario/entity/usuario.dart';
 import '../view/adicionar_usuario.dart';
 
 import '../main.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lista_usuario/bd/conection.dart';
-import 'package:lista_usuario/entity/Usuario.dart';
+import 'package:lista_usuario/entity/usuario.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
