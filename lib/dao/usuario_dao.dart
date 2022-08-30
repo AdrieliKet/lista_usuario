@@ -42,7 +42,7 @@ class UsuarioDao extends StatelessWidget {
   Future<List<Usuario>> listarTodos() async {
     late Database database;
     try {
-      const sql = 'SELECT * FROM cliente';
+      const sql = 'SELECT * FROM cidade';
       database = await Conexao.abrirConexao();
       List<Map<String, Object?>> resultado = (await database.rawQuery(sql));
       if (resultado.isEmpty) throw Exception('Sem registros');
