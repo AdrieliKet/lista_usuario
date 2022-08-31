@@ -4,4 +4,8 @@ class Cidade {
   final String estado;
 
   Cidade({this.id, required this.nome, required this.estado});
+
+   int get getId {
+    return id;
+  }
 }

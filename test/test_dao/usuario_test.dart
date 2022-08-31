@@ -12,7 +12,7 @@ void main() {
   databaseFactory = databaseFactoryFfi;
 
   setUp(() {
-    usuarioDao = const UsuarioDao();
+    usuarioDao = UsuarioDao();
   });
 
   tearDown(() async {
@@ -20,15 +20,15 @@ void main() {
     deleteDatabase(path); // irá excluir o banco - não use na produção
   });
 
-  test("Persistir no banco de dados um usuário", () async {
-    var usuario =  Usuario(
-        nome: "adrieli",
-        email: "adrieli@gmail.com",
-        senha: 'adrieli1010',
-        telefone: '44999999999');
-    var resultado = await usuarioDao.salvar(usuario);
-    expect(resultado, true);
-  });
+  // test("Persistir no banco de dados um usuário", () async {
+  //   var usuario =  Usuario(
+  //       nome: "adrieli",
+  //       email: "adrieli@gmail.com",
+  //       senha: 'adrieli1010',
+  //       telefone: '44999999999');
+  //   var resultado = await usuarioDao.salvar(usuario);
+  //   expect(resultado, true);
+  // });
 
   test("Alterar um registro de um usuário do banco", () async {
     var usuario =Usuario(

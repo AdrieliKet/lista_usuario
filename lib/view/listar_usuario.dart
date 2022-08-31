@@ -12,7 +12,7 @@ class ListaUsuario extends StatefulWidget {
 }
 
 class _ListausuarioState extends State<ListaUsuario> {
-  UsuarioDao usuarioDao = const UsuarioDao();
+  UsuarioDao usuarioDao = UsuarioDao();
 
   @override
   Widget build(BuildContext context) {

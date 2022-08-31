@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:lista_usuario/bd/conection.dart';
+import 'package:lista_usuario/entity/cidade.dart';
 import 'package:lista_usuario/entity/usuario.dart';
 import 'package:sqflite/sqflite.dart';
 
-class UsuarioDao extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    throw UnimplementedError();
-  }
+class UsuarioDao {
+  late Cidade cidade;
 
-  const UsuarioDao({Key? key}) : super(key: key);
-
-  Future<bool> salvar(Usuario usuario) async {
-    Database db = await Conexao.abrirConexao();
-    const sql =
-        'INSERT INTO usuario (nome, email, senha, telefone) VALUES (?,?,?,?)';
-    var linhasAfetadas = await db.rawInsert(
-        sql, [usuario.nome, usuario.email, usuario.senha, usuario.telefone]);
-    return linhasAfetadas > 0;
-  }
+  // Future<bool> salvar(Usuario usuario) async {
+  //   Database db = await Conexao.abrirConexao();
+  //   const sql =
+  //       'INSERT INTO usuario (nome, email, senha, telefone, cidade_id) VALUES (?,?,?,?,?)';
+  //   var linhasAfetadas = await db.rawInsert(sql, [
+  //     usuario.nome,
+  //     usuario.email,
+  //     usuario.senha,
+  //     usuario.telefone,
+  //     usuario.cidade.id
+  //   ]);
+  //   return linhasAfetadas > 0;
+  // }
 
   Future<bool> alterar(Usuario usuario) async {
     const sql =
-        'UPDATE usuario SET nome = ?, email=?, senha=?, telefone=? WHERE id = ?';
+        'UPDATE usuario SET nome = ?, email=?, senha=?, telefone=?, cidade_id WHERE id = ?';
     Database db = await Conexao.abrirConexao();
     var linhasAfetadas = await db.rawUpdate(sql, [
       usuario.nome,

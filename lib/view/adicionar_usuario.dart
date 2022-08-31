@@ -13,7 +13,7 @@ class AdicionarUsuario extends StatefulWidget {
 
 class _AdicionarUsuarioState extends State<AdicionarUsuario> {
   dynamic id;
-  UsuarioDao usuarioDao = const UsuarioDao();
+  UsuarioDao usuarioDao = UsuarioDao();
   String? nome;
   String? email;
   String? senha;
@@ -40,7 +40,7 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
           IconButton(
               icon: const Icon(Icons.check_box_outlined),
               onPressed: () {
-                usuarioDao.salvar(usuario);
+                // usuarioDao.salvar(usuario);
                 setState(() {});
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const MyApp()));

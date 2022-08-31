@@ -11,7 +11,7 @@ class EditarUsuario extends StatefulWidget {
 }
 
 class _EditarUsuarioState extends State<EditarUsuario> {
-  UsuarioDao usuarioDao = const UsuarioDao();
+  UsuarioDao usuarioDao = UsuarioDao();
   dynamic id;
   String? nome;
   String? email;
