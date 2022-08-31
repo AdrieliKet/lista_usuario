@@ -11,7 +11,7 @@ class EditarUsuario extends StatefulWidget {
 }
 
 class _EditarUsuarioState extends State<EditarUsuario> {
-  UsuarioDao usuarioDao = new UsuarioDao();
+  UsuarioDao usuarioDao = const UsuarioDao();
   dynamic id;
   String? nome;
   String? email;
@@ -38,7 +38,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
           IconButton(
               icon: const Icon(Icons.check_box_outlined),
               onPressed: () {
-                usuarioDao.editar(usuario);
+                usuarioDao.alterar(usuario);
                 setState(() {});
                 Navigator.pop(context);
               }),
@@ -46,7 +46,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(15.0),
+          margin: const EdgeInsets.all(15.0),
           child: Form(
             child: Column(children: [
               usuarioDao.criarCampo('Telefone:', 'Digite seu novo telefone',

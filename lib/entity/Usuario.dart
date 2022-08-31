@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class Usuario {
   final dynamic id;
   final String nome;

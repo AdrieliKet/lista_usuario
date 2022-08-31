@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lista_usuario/dao/usuario_dao.dart';
-import 'package:lista_usuario/entity/usuario.dart';
-import '../view/adicionar_usuario.dart';
 
 import '../main.dart';
 
@@ -14,7 +12,7 @@ class ListaUsuario extends StatefulWidget {
 }
 
 class _ListausuarioState extends State<ListaUsuario> {
-  UsuarioDao usuarioDao = new UsuarioDao();
+  UsuarioDao usuarioDao = const UsuarioDao();
 
   @override
   Widget build(BuildContext context) {
@@ -63,13 +61,11 @@ class _ListausuarioState extends State<ListaUsuario> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          content: Text("Excluir?"),
+                                          content: const Text("Excluir?"),
                                           actions: [
                                             ElevatedButton(
-                                              child: Text("Sim"),
+                                              child: const Text("Sim"),
                                               onPressed: () {
-                                                AdicionarUsuario form =
-                                                    new AdicionarUsuario();
                                                 usuarioDao.excluir(int.parse(
                                                     usuario['id']
                                                         .toString()));
@@ -77,12 +73,12 @@ class _ListausuarioState extends State<ListaUsuario> {
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          MyApp(),
+                                                          const MyApp(),
                                                     ));
                                               },
                                             ),
                                             ElevatedButton(
-                                              child: Text("Não"),
+                                              child: const Text("Não"),
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },

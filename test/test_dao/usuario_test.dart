@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lista_usuario/dao/usuario_dao.dart';
 import 'package:lista_usuario/entity/usuario.dart';
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -11,17 +12,32 @@ void main() {
   databaseFactory = databaseFactoryFfi;
 
   setUp(() {
-    usuarioDao = UsuarioDao();
+    usuarioDao = const UsuarioDao();
+  });
+
+  tearDown(() async {
+    String path = join(await getDatabasesPath(), 'banco.db');
+    deleteDatabase(path); // irá excluir o banco - não use na produção
   });
 
   test("Persistir no banco de dados um usuário", () async {
-    var resultado = await usuarioDao.salvar(Usuario(nome: "adrieli", email: "adrieli@gmail.com" , senha: 'adrieli1010', telefone: '44999999999'));
+    var usuario =  Usuario(
+        nome: "adrieli",
+        email: "adrieli@gmail.com",
+        senha: 'adrieli1010',
+        telefone: '44999999999');
+    var resultado = await usuarioDao.salvar(usuario);
     expect(resultado, true);
   });
 
   test("Alterar um registro de um usuário do banco", () async {
-    var resultado = await usuarioDao.editar(Usuario(
-        id: 1, nome: "Adrieli Kethin dos Santos", email: "adrielikethin@gmail.com", senha: "1010adrieli", telefone: "44888888888"));
+    var usuario =Usuario(
+        id: 1,
+        nome: "Adrieli Kethin dos Santos",
+        email: "adrielikethin@gmail.com",
+        senha: "1010adrieli",
+        telefone: "44888888888");
+    var resultado = await usuarioDao.alterar(usuario);
     expect(resultado, true);
   });
 

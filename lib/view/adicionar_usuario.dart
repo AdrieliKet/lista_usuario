@@ -13,7 +13,7 @@ class AdicionarUsuario extends StatefulWidget {
 
 class _AdicionarUsuarioState extends State<AdicionarUsuario> {
   dynamic id;
-  UsuarioDao usuarioDao = new UsuarioDao();
+  UsuarioDao usuarioDao = const UsuarioDao();
   String? nome;
   String? email;
   String? senha;
@@ -43,13 +43,13 @@ class _AdicionarUsuarioState extends State<AdicionarUsuario> {
                 usuarioDao.salvar(usuario);
                 setState(() {});
                 Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) => MyApp()));
+                    MaterialPageRoute(builder: (context) => const MyApp()));
               }),
         ],
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(15.0),
+          margin: const EdgeInsets.all(15.0),
           child: Form(
             child: Column(children: [
               usuarioDao.criarCampo('Nome:', 'Digite seu nome',

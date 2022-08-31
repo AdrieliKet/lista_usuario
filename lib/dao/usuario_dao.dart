@@ -1,44 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:lista_usuario/bd/conection.dart';
 import 'package:lista_usuario/entity/usuario.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../main.dart';
-
 class UsuarioDao extends StatelessWidget {
-   @override
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     throw UnimplementedError();
   }
-  UsuarioDao({Key? key}) : super(key: key);
-  //  dynamic validarEmail = r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
-  //  dynamic validarTelefone = r"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$";
 
-  Future<int> salvar( Usuario usuario) async {
-    Database database = await Conexao.abrirConexao();
-    String sql;
-    Future<int> linhasAfetadas;
-    sql = 'INSERT INTO usuario (nome, email, senha, telefone) VALUES (?,?,?,?)';
-    linhasAfetadas = database.rawInsert(sql, [usuario.nome, usuario.email, usuario.senha, usuario.telefone]);
+  const UsuarioDao({Key? key}) : super(key: key);
 
-    return linhasAfetadas;
+  Future<bool> salvar(Usuario usuario) async {
+    Database db = await Conexao.abrirConexao();
+    const sql =
+        'INSERT INTO usuario (nome, email, senha, telefone) VALUES (?,?,?,?)';
+    var linhasAfetadas = await db.rawInsert(
+        sql, [usuario.nome, usuario.email, usuario.senha, usuario.telefone]);
+    return linhasAfetadas > 0;
   }
 
-  Future<int> editar(Usuario usuario) async {
-    Database database = await Conexao.abrirConexao();
-    String sql;
-    Future<int> linhasAfetadas;
-      sql =
-          'UPDATE usuario SET nome = ?, email=?, senha=?, telefone=? WHERE id = ?';
-      linhasAfetadas = database.rawUpdate(
-          sql, [usuario.nome, usuario.email, usuario.senha, usuario.telefone, usuario.id]);
-
-    return linhasAfetadas;
+  Future<bool> alterar(Usuario usuario) async {
+    const sql =
+        'UPDATE usuario SET nome = ?, email=?, senha=?, telefone=? WHERE id = ?';
+    Database db = await Conexao.abrirConexao();
+    var linhasAfetadas = await db.rawUpdate(sql, [
+      usuario.nome,
+      usuario.email,
+      usuario.senha,
+      usuario.telefone,
+      usuario.id
+    ]);
+    return linhasAfetadas > 0;
   }
 
- @override
   Future<List<Usuario>> listarTodos() async {
     late Database database;
     try {
@@ -62,14 +57,19 @@ class UsuarioDao extends StatelessWidget {
     }
   }
 
-Future<int> excluir(int id) async {
-  String caminho = join(await getDatabasesPath(), 'banco1.db');
-  Database database = await Conexao.abrirConexao();
-  String sql = "DELETE FROM usuario WHERE id = ?";
-  Future<int> linhaAfetada;
-  linhaAfetada = database.rawDelete(sql, [id]);
-  return linhaAfetada;
-}
+  Future<bool> excluir(int id) async {
+    late Database db;
+    try {
+      const sql = 'DELETE FROM usuario WHERE id = ?';
+      db = await Conexao.abrirConexao();
+      int linhasAfetadas = await db.rawDelete(sql, [id]);
+      return linhasAfetadas > 0;
+    } catch (e) {
+      throw Exception('Erro ao excluir');
+    } finally {
+      db.close();
+    }
+  }
 
   Widget criarCampo(String rotulo, String? dica,
       ValueChanged<String>? vincularValor, String? valorInicial) {
