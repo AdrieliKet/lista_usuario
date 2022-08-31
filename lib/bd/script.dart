@@ -14,8 +14,6 @@ final criarBanco = [
     id INTEGER PRIMARY KEY,
     nome TEXT NOT NULL, 
     estado TEXT NOT NULL
-    )''',
-  '''INSERT INTO usuario(nome, email, senha, telefone, cidade_id) VALUES("Adrieli","adrieli@gmail.com","0000", "44999999999,1")''',
-  '''INSERT INTO cidade(nome, estado) VALUES("Paranavaí","PR")''',
-  '''INSERT INTO cidade(nome, estado) VALUES("Nova Esperança","Paraná")''',
+    )'''
+
 ];

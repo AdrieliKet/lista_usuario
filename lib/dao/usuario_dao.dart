@@ -7,29 +7,30 @@ import 'package:sqflite/sqflite.dart';
 class UsuarioDao {
   late Cidade cidade;
 
-  // Future<bool> salvar(Usuario usuario) async {
-  //   Database db = await Conexao.abrirConexao();
-  //   const sql =
-  //       'INSERT INTO usuario (nome, email, senha, telefone, cidade_id) VALUES (?,?,?,?,?)';
-  //   var linhasAfetadas = await db.rawInsert(sql, [
-  //     usuario.nome,
-  //     usuario.email,
-  //     usuario.senha,
-  //     usuario.telefone,
-  //     usuario.cidade.id
-  //   ]);
-  //   return linhasAfetadas > 0;
-  // }
+  Future<bool> salvar(Usuario usuario) async {
+    Database db = await Conexao.abrirConexao();
+    const sql =
+        'INSERT INTO usuario (nome, email, senha, telefone, cidade_id) VALUES (?,?,?,?,?)';
+    var linhasAfetadas = await db.rawInsert(sql, [
+      usuario.nome,
+      usuario.email,
+      usuario.senha,
+      usuario.telefone,
+      usuario.cidade.id
+    ]);
+    return linhasAfetadas > 0;
+  }
 
   Future<bool> alterar(Usuario usuario) async {
     const sql =
-        'UPDATE usuario SET nome = ?, email=?, senha=?, telefone=?, cidade_id WHERE id = ?';
+        'UPDATE usuario SET nome = ?, email=?, senha=?, telefone=?, cidade_id=? WHERE id = ?';
     Database db = await Conexao.abrirConexao();
     var linhasAfetadas = await db.rawUpdate(sql, [
       usuario.nome,
       usuario.email,
       usuario.senha,
       usuario.telefone,
+      usuario.cidade.id,
       usuario.id
     ]);
     return linhasAfetadas > 0;
@@ -48,7 +49,8 @@ class UsuarioDao {
             nome: linha['nome'].toString(),
             email: linha['email'].toString(),
             senha: linha['senha'].toString(),
-            telefone: linha['telefone'].toString());
+            telefone: linha['telefone'].toString(),
+            cidade: linha['cidade_id'] as Cidade);
       }).toList();
       return usuarios;
     } catch (e) {
