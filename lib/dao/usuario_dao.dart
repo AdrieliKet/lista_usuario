@@ -39,7 +39,7 @@ class UsuarioDao {
   Future<List<Usuario>> listarTodos() async {
     late Database database;
     try {
-      const sql = 'SELECT * FROM cidade';
+      const sql = 'SELECT * FROM usuario';
       database = await Conexao.abrirConexao();
       List<Map<String, Object?>> resultado = (await database.rawQuery(sql));
       if (resultado.isEmpty) throw Exception('Sem registros');
