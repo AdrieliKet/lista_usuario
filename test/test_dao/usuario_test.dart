@@ -39,7 +39,7 @@ void main() {
         email: "adrielikethin@gmail.com",
         senha: "1010adrieli",
         telefone: "44888888888",
-        cidade: Cidade( nome: "São Paulo", estado: "SP"));
+        cidade: Cidade( id: 1, nome: "São Paulo", estado: "SP"));
     var resultado = await usuarioDao.alterar(usuario);
     expect(resultado, true);
   });

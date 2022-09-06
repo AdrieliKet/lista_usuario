@@ -4,6 +4,8 @@ import 'package:lista_usuario/entity/cidade.dart';
 import 'package:lista_usuario/entity/usuario.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../entity/cidade.dart';
+
 class UsuarioDao {
   late Cidade cidade;
 
